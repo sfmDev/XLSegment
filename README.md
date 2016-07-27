@@ -10,8 +10,9 @@ TKDotSegment is a segment with dot animation
 
 XLSegment 是一个目前有三种 Style的Segment, 支持滚动.
 写这个是因为在[TKDotSegment](https://github.com/TBXark/TKDotSegment)的时候,发现不支持 scroll 的滚动, 就产生了自己再写一个的想法.
-</br>
+<br>
 XLSegment有如下三种 Style:
+<br>
 ![image](https://github.com/sfmDev/XLSegment/blob/master/XLSegmentGif.gif)   
 
 
