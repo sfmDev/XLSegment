@@ -7,6 +7,6 @@ Pod::Spec.new do |s|
   s.author       = { "TBXark" => "https://github.com/sfmDev" }
   s.platform     = :ios, "8.0"
   s.source       = { :git => "https://github.com/sfmDev/XLSegment.git", :tag => s.version }
-  s.source_files  = "XLSegmentControl.swift"
+  s.source_files  = "XLSegmentControl/XLSegmentControl.swift"
   s.requires_arc = true
 end
