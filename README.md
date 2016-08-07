@@ -17,10 +17,14 @@ XLSegment有如下三种 Style:
 ---
 欢迎各位star以及pl.
 
-
 ## CooaPod
 
 ` pod 'XLSegment', '~> 0.0.1'`
+
+
+## Version
+
+   ` 0.0.2 -> 可以设置图片或者文字作为 button 的样式`
 
 
 ## License
