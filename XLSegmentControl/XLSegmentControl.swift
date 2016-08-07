@@ -14,6 +14,11 @@ enum Style {
     case None
 }
 
+enum ButtonType {
+    case Title
+    case Image
+}
+
 /// 点击事件的闭包
 typealias XLSegmentAction = (index: Int) -> Void
 
@@ -189,10 +194,17 @@ class XLSegmentControl: UIView {
 
     /// 被选中的 Index
     private(set) var selectIndex: Int = -1
+
     /// 背景滚动的 scrollview
     var scrollView: UIScrollView?
     /// 动画类型
     var style: Style = .Dot
+
+    var buttonType: ButtonType = .Title {
+        didSet {
+            resetSegment()
+        }
+    }
 
     private var titleButtonArray = [UIButton]()
     private var dotArray = [PLDot]()
@@ -220,10 +232,17 @@ class XLSegmentControl: UIView {
 
         func setNameForButton(name: String) -> UIButton {
             let button = UIButton(type: .Custom)
-            button.setTitle(name, forState: .Normal)
-            button.setTitleColor(unSelectTitleColor, forState: .Normal)
-            button.setTitleColor(selectTitleColor, forState: .Disabled)
-            button.titleLabel?.font = titleFont
+            switch buttonType {
+                case .Title:
+                    button.setTitle(name, forState: .Normal)
+                    button.setTitleColor(unSelectTitleColor, forState: .Normal)
+                    button.setTitleColor(selectTitleColor, forState: .Disabled)
+                    button.titleLabel?.font = titleFont
+                case .Image:
+                    print(name)
+                    button.setImage(UIImage(named: name), forState: .Normal)
+            }
+
             button.addTarget(self, action: #selector(XLSegmentControl.titleButtonClick(_:)), forControlEvents: .TouchUpInside)
             return button
         }
@@ -307,7 +326,7 @@ extension XLSegmentControl {
     }
 
     func changeSelectedIndex(index: Int, animate: Bool = true) {
-        changeSelectedIndex(index, internaliFlag: false, animate: true)
+        changeSelectedIndex(index, internaliFlag: false, animate: animate)
     }
     /**
      发生点击事件时触发(私有)
@@ -335,6 +354,11 @@ extension XLSegmentControl {
         scrollItemVisiable(titleButtonArray[index])
     }
 
+    /**
+     scrollView item 可见(下一个 button 会滑动 可设置滑动出来的距离)
+     default contentOfffset = width * 0.75
+     - parameter item: 点击的 button
+     */
     private func scrollItemVisiable(item: UIButton) {
         var frame = item.frame
         if item != self.scrollView?.subviews.first && item != self.scrollView!.subviews.last {
