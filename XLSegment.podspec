@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name         = "XLSegment"
-  s.version      = "0.0.2"
-  s.summary      = "A simple user segmentControl "
+  s.version      = "0.1.0"
+  s.summary      = "A simple user segmentControl, Version 0.1.0 for Swift3 "
   s.license      = { :type => 'MIT License', :file => 'LICENSE' } # 协议
   s.homepage     = "https://github.com/sfmDev/XLSegment"
   s.author       = { "sfmDev" => "https://github.com/sfmDev" }
