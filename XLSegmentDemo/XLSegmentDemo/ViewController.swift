@@ -16,8 +16,8 @@ class ViewController: UIViewController {
         let titles = ["First", "Second", "Third", "Fourth","Fifth", "Sixth", "Seventh", "Eighth","Ninth", "Tenth", "Eleventh", "Twelfth"]
         let imageArray = ["button", "button", "button", "button", "button", "button", "button", "button"]
 
-        let segment = XLSegmentControl(titles: imageArray, frame: CGRect(x: 0, y: 0, width: 375, height: 40), style: .Line)
-        segment.buttonType = .Image
+        let segment = XLSegmentControl(titles: imageArray, frame: CGRect(x: 0, y: 0, width: 375, height: 40), style: .line)
+        segment.buttonType = .image
         segment.navColor = UIColor(red:1,  green:0.539,  blue:0.490, alpha:1)
         segment.selectTitleColor = UIColor(red:1,  green:0.539,  blue:0.490, alpha:1)
         segment.changeSelectedIndex(4, animate: false)
@@ -28,7 +28,7 @@ class ViewController: UIViewController {
         segment.center = view.center
 
 
-        let dotSegment = XLSegmentControl(titles: titles, frame: CGRect(x: 0, y: 150, width: 375, height: 40), style: .Dot)
+        let dotSegment = XLSegmentControl(titles: titles, frame: CGRect(x: 0, y: 150, width: 375, height: 40), style: .dot)
         dotSegment.navColor = UIColor(red:1,  green:0.539,  blue:0.490, alpha:1)
         dotSegment.selectTitleColor = UIColor(red:1,  green:0.539,  blue:0.490, alpha:1)
         dotSegment.numOfDot = 4
@@ -38,7 +38,7 @@ class ViewController: UIViewController {
         }
         view.addSubview(dotSegment)
 
-        let noneSegment = XLSegmentControl(titles: titles, frame: CGRect(x: 0, y: 500, width: 375, height: 40), style: .None)
+        let noneSegment = XLSegmentControl(titles: titles, frame: CGRect(x: 0, y: 500, width: 375, height: 40), style: .none)
         noneSegment.navColor = UIColor(red:1,  green:0.539,  blue:0.490, alpha:1)
         noneSegment.selectTitleColor = UIColor(red:1,  green:0.539,  blue:0.490, alpha:1)
         noneSegment.clickAction = { (index: Int) in

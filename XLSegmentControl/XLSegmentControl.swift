@@ -7,20 +7,31 @@
 //
 
 import UIKit
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+    switch (lhs, rhs) {
+    case let (l?, r?):
+        return l < r
+    case (nil, _?):
+        return true
+    default:
+        return false
+    }
+}
+
 
 enum Style {
-    case Dot
-    case Line
-    case None
+    case dot
+    case line
+    case none
 }
 
 enum ButtonType {
-    case Title
-    case Image
+    case title
+    case image
 }
 
 /// 点击事件的闭包
-typealias XLSegmentAction = (index: Int) -> Void
+typealias XLSegmentAction = (_ index: Int) -> Void
 
 class XLSegmentControl: UIView {
 
@@ -34,15 +45,15 @@ class XLSegmentControl: UIView {
         init(color: UIColor) {
             self.color = color
             super.init(frame: CGRect.zero)
-            backgroundColor = UIColor.clearColor()
+            backgroundColor = UIColor.clear
         }
 
         required init?(coder aDecoder: NSCoder) {
             fatalError("init(coder:) has not been implemented")
         }
 
-        override func drawRect(rect: CGRect) {
-            let oval = UIBezierPath(ovalInRect: rect)
+        override func draw(_ rect: CGRect) {
+            let oval = UIBezierPath(ovalIn: rect)
             color.setFill()
             oval.fill()
         }
@@ -56,14 +67,14 @@ class XLSegmentControl: UIView {
         init(color: UIColor) {
             self.color = color
             super.init(frame: CGRect.zero)
-            backgroundColor = UIColor.clearColor()
+            backgroundColor = UIColor.clear
         }
 
         required init?(coder aDecoder: NSCoder) {
             fatalError("init(coder:) has not been implemented")
         }
 
-        override func drawRect(rect: CGRect) {
+        override func draw(_ rect: CGRect) {
             let oval = UIBezierPath(rect: rect)
             color.setFill()
             oval.fill()
@@ -113,15 +124,15 @@ class XLSegmentControl: UIView {
     var navColor = XLSegmentControl.defaultColor {
         didSet {
             switch style {
-            case .Dot:
+            case .dot:
                 for dot in dotArray {
                     dot.color = navColor
                 }
-            case .Line:
+            case .line:
                 for dot in lineArray {
                     dot.color = navColor
                 }
-            case .None : break
+            case .none : break
             }
 
         }
@@ -133,7 +144,7 @@ class XLSegmentControl: UIView {
     var selectTitleColor: UIColor? = XLSegmentControl.defaultColor {
         didSet {
             for btn in titleButtonArray {
-                btn.setTitleColor(selectTitleColor, forState: .Disabled)
+                btn.setTitleColor(selectTitleColor, for: .disabled)
             }
         }
     }
@@ -141,10 +152,10 @@ class XLSegmentControl: UIView {
     /**
      *  未选中时的颜色
      */
-    var unSelectTitleColor: UIColor? = UIColor.darkGrayColor() {
+    var unSelectTitleColor: UIColor? = UIColor.darkGray {
         didSet {
             for btn in titleButtonArray {
-                btn.setTitleColor(selectTitleColor, forState: .Normal)
+                btn.setTitleColor(selectTitleColor, for: UIControlState())
             }
         }
     }
@@ -152,7 +163,7 @@ class XLSegmentControl: UIView {
     /**
      *  字体
      */
-    var titleFont: UIFont = UIFont.systemFontOfSize(16) {
+    var titleFont: UIFont = UIFont.systemFont(ofSize: 16) {
         didSet {
             for btn in titleButtonArray {
                 btn.titleLabel?.font = titleFont
@@ -193,22 +204,22 @@ class XLSegmentControl: UIView {
 
 
     /// 被选中的 Index
-    private(set) var selectIndex: Int = -1
+    fileprivate(set) var selectIndex: Int = -1
 
     /// 背景滚动的 scrollview
     var scrollView: UIScrollView?
     /// 动画类型
-    var style: Style = .Dot
+    var style: Style = .dot
 
-    var buttonType: ButtonType = .Title {
+    var buttonType: ButtonType = .title {
         didSet {
             resetSegment()
         }
     }
 
-    private var titleButtonArray = [UIButton]()
-    private var dotArray = [PLDot]()
-    private var lineArray = [Line]()
+    fileprivate var titleButtonArray = [UIButton]()
+    fileprivate var dotArray = [PLDot]()
+    fileprivate var lineArray = [Line]()
 
     init(titles: [String], frame: CGRect, style: Style) {
         self.titles = titles
@@ -223,27 +234,27 @@ class XLSegmentControl: UIView {
         shareInit()
     }
 
-    private func shareInit() {
+    fileprivate func shareInit() {
         scrollView = UIScrollView.init(frame: self.bounds)
 
         guard titles.count > 0 else { return }
-        scrollView!.userInteractionEnabled = true
-        userInteractionEnabled = true
+        scrollView!.isUserInteractionEnabled = true
+        isUserInteractionEnabled = true
 
-        func setNameForButton(name: String) -> UIButton {
-            let button = UIButton(type: .Custom)
+        func setNameForButton(_ name: String) -> UIButton {
+            let button = UIButton(type: .custom)
             switch buttonType {
-                case .Title:
-                    button.setTitle(name, forState: .Normal)
-                    button.setTitleColor(unSelectTitleColor, forState: .Normal)
-                    button.setTitleColor(selectTitleColor, forState: .Disabled)
-                    button.titleLabel?.font = titleFont
-                case .Image:
-                    print(name)
-                    button.setImage(UIImage(named: name), forState: .Normal)
+            case .title:
+                button.setTitle(name, for: UIControlState())
+                button.setTitleColor(unSelectTitleColor, for: UIControlState())
+                button.setTitleColor(selectTitleColor, for: .disabled)
+                button.titleLabel?.font = titleFont
+            case .image:
+                print(name)
+                button.setImage(UIImage(named: name), for: UIControlState())
             }
 
-            button.addTarget(self, action: #selector(XLSegmentControl.titleButtonClick(_:)), forControlEvents: .TouchUpInside)
+            button.addTarget(self, action: #selector(XLSegmentControl.titleButtonClick(_:)), for: .touchUpInside)
             return button
         }
 
@@ -254,7 +265,7 @@ class XLSegmentControl: UIView {
 
         var buttonFrame = CGRect(x: 0,y: 0,width: width,height: height)
         var titleButtonArrayTemp = [UIButton]()
-        for (i, btnTitle) in titles.enumerate() {
+        for (i, btnTitle) in titles.enumerated() {
             buttonFrame.origin.x = width * CGFloat(i)
 
             let button = setNameForButton(btnTitle)
@@ -266,48 +277,48 @@ class XLSegmentControl: UIView {
 
 
         switch style {
-            case .Dot:
-                var dotArrayTemp = [PLDot]()
-                for i in 0..<numOfDot {
-                    let dot = PLDot(color: navColor)
-                    dot.tag = i
-                    dotArrayTemp.append(dot)
-                    scrollView!.addSubview(dot)
-                }
-                dotArray = dotArrayTemp
-                titleButtonArray = titleButtonArrayTemp
-                changeSelectedIndex(0, internaliFlag: false, animate: false)
-                addSubview(scrollView!)
+        case .dot:
+            var dotArrayTemp = [PLDot]()
+            for i in 0..<numOfDot {
+                let dot = PLDot(color: navColor)
+                dot.tag = i
+                dotArrayTemp.append(dot)
+                scrollView!.addSubview(dot)
+            }
+            dotArray = dotArrayTemp
+            titleButtonArray = titleButtonArrayTemp
+            changeSelectedIndex(0, internaliFlag: false, animate: false)
+            addSubview(scrollView!)
 
-            case .Line:
-                var lineArrayTemp = [Line]()
-                let line = Line(color: navColor)
-                lineArrayTemp.append(line)
-                scrollView?.addSubview(line)
+        case .line:
+            var lineArrayTemp = [Line]()
+            let line = Line(color: navColor)
+            lineArrayTemp.append(line)
+            scrollView?.addSubview(line)
 
-                lineArray = lineArrayTemp
-                titleButtonArray = titleButtonArrayTemp
-                changeSelectedIndex(0, internaliFlag: false, animate: false)
-                addSubview(scrollView!)
+            lineArray = lineArrayTemp
+            titleButtonArray = titleButtonArrayTemp
+            changeSelectedIndex(0, internaliFlag: false, animate: false)
+            addSubview(scrollView!)
 
-            case .None:
-                titleButtonArray = titleButtonArrayTemp
-                changeSelectedIndex(0, internaliFlag: false, animate: false)
-                addSubview(scrollView!)
+        case .none:
+            titleButtonArray = titleButtonArrayTemp
+            changeSelectedIndex(0, internaliFlag: false, animate: false)
+            addSubview(scrollView!)
 
         }
 
     }
 
-    private func resetSegment() {
+    fileprivate func resetSegment() {
         subviews.forEach { $0.removeFromSuperview() }
 
         switch style {
-        case .Dot:
+        case .dot:
             dotArray = []
-        case .Line:
+        case .line:
             lineArray = []
-        case .None: break
+        case .none: break
         }
 
         titleButtonArray = []
@@ -320,12 +331,12 @@ class XLSegmentControl: UIView {
 
 extension XLSegmentControl {
 
-    @objc private func titleButtonClick(button: UIButton) {
+    @objc fileprivate func titleButtonClick(_ button: UIButton) {
         changeSelectedIndex(button.tag, internaliFlag: true)
 
     }
 
-    func changeSelectedIndex(index: Int, animate: Bool = true) {
+    func changeSelectedIndex(_ index: Int, animate: Bool = true) {
         changeSelectedIndex(index, internaliFlag: false, animate: animate)
     }
     /**
@@ -335,20 +346,20 @@ extension XLSegmentControl {
      - parameter internaliFlag: 是否内部点击触发的标志位
      - parameter animate:       是否需要动画效果
      */
-    private func changeSelectedIndex(index: Int, internaliFlag: Bool, animate: Bool = true) {
-        if selectIndex >= 0 {titleButtonArray[selectIndex].enabled = true }
+    fileprivate func changeSelectedIndex(_ index: Int, internaliFlag: Bool, animate: Bool = true) {
+        if selectIndex >= 0 {titleButtonArray[selectIndex].isEnabled = true }
         let flag = index > selectIndex
         guard index >= 0 && index < titles.count else { return }
-        titleButtonArray[index].enabled = false
+        titleButtonArray[index].isEnabled = false
         selectIndex = index
-        self.clickAction?(index: index)
+        self.clickAction?(index)
 
         switch style {
-        case .Dot:
+        case .dot:
             changeDotFrameWithIndex(selectIndex, animate: animate, toRight: flag)
-        case .Line:
+        case .line:
             changeLineFrameWithIndex(selectIndex, animate: animate, toRight: flag)
-        case .None:
+        case .none:
             changeSelctedBtnWithIndex(selectIndex, animate: animate, toRight: flag)
         }
         scrollItemVisiable(titleButtonArray[index])
@@ -359,11 +370,11 @@ extension XLSegmentControl {
      default contentOfffset = width * 0.75
      - parameter item: 点击的 button
      */
-    private func scrollItemVisiable(item: UIButton) {
+    fileprivate func scrollItemVisiable(_ item: UIButton) {
         var frame = item.frame
         if item != self.scrollView?.subviews.first && item != self.scrollView!.subviews.last {
-            let min: CGFloat = CGRectGetMinX(item.frame)
-            let max: CGFloat = CGRectGetMaxX(item.frame)
+            let min: CGFloat = item.frame.minX
+            let max: CGFloat = item.frame.maxX
 
             if min < self.scrollView?.contentOffset.x {
                 frame = CGRect(origin: CGPoint(x: item.frame.origin.x - width*0.75, y: item.frame.origin.y), size: item.frame.size)
@@ -375,7 +386,7 @@ extension XLSegmentControl {
         self.scrollView?.scrollRectToVisible(frame, animated: true)
     }
 
-    private func changeDotFrameWithIndex(index: Int, animate: Bool, toRight: Bool) {
+    fileprivate func changeDotFrameWithIndex(_ index: Int, animate: Bool, toRight: Bool) {
         let rect = titleButtonArray[index].frame
         let num = CGFloat(numOfDot)
         var s = dotSpace
@@ -386,7 +397,8 @@ extension XLSegmentControl {
         }
 
         let y = rect.origin.y + rect.height - dotDiameter - 2
-        let beginSpace = (rect.width - (num * dotDiameter) - ((num + 1) * s))/2.0
+        let numWidth = num * dotDiameter
+        let beginSpace = (rect.width - numWidth - ((num + 1) * s))/2.0
         let originx = rect.origin.x + beginSpace
         var bRect = CGRect(x: s, y: y, width: dotDiameter, height: dotDiameter)
 
@@ -395,7 +407,7 @@ extension XLSegmentControl {
             let dot = dotArray[index]
             bRect.origin.x = s * CGFloat(index + 1) + dotDiameter * CGFloat(index) + originx
             if animate {
-                UIView.animateWithDuration(0.2, delay: Double(i) * 0.1, options: .CurveLinear, animations: {
+                UIView.animate(withDuration: 0.2, delay: Double(i) * 0.1, options: .curveLinear, animations: {
                     dot.frame = bRect
                     print(dot.frame)
                     }, completion: nil)
@@ -405,10 +417,10 @@ extension XLSegmentControl {
         }
     }
 
-    private func changeLineFrameWithIndex(index: Int, animate: Bool, toRight: Bool) {
+    fileprivate func changeLineFrameWithIndex(_ index: Int, animate: Bool, toRight: Bool) {
         let rect = titleButtonArray[index].frame
 
-        //定义下面滑动条的宽高 
+        //定义下面滑动条的宽高
         let smallWidth: CGFloat = rect.width - padding*2
         let smallHeight: CGFloat = 2
         let y = rect.origin.y + rect.height - smallHeight
@@ -418,7 +430,7 @@ extension XLSegmentControl {
 
         bRect.origin.x = rect.width * CGFloat(index) + padding
         if animate {
-            UIView.animateWithDuration(0.2, delay: 0.1, options: .CurveLinear, animations: {
+            UIView.animate(withDuration: 0.2, delay: 0.1, options: .curveLinear, animations: {
                 line.frame = bRect
                 print(line.frame)
                 }, completion: nil)
@@ -426,8 +438,8 @@ extension XLSegmentControl {
             line.frame = bRect
         }
     }
-
-    private func changeSelctedBtnWithIndex(index: Int, animate: Bool, toRight: Bool) {
-
+    
+    fileprivate func changeSelctedBtnWithIndex(_ index: Int, animate: Bool, toRight: Bool) {
+        
     }
 }
