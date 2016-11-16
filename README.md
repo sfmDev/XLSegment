@@ -19,8 +19,8 @@ XLSegment有如下三种 Style:
 
 ## CooaPod
    Swift 3: 
-` pod 'XLSegment', '~> 0.1.0'`
-   else 
+` pod 'XLSegment', '~> 0.1.0'`</br>
+   else swift 2.x
 ` pod 'XLSegment', '~> 0.0.2'`
 
 
