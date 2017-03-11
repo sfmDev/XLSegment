@@ -624,6 +624,7 @@ extension XLSegmentControl: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
         let cell: XLCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "XLCollectionViewCell", for: indexPath) as! XLCollectionViewCell
         cell.cellBtn.setTitle(self.titles[indexPath.row], for: .normal)
+        cell.cellBtn.isEnabled = false
         return cell
     }
 
