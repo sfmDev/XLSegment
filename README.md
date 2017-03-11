@@ -7,16 +7,13 @@
 ---
 
 XLSegment 是一个目前有三种 Style 的 Segment, 支持滚动.
-写这个是因为在[TKDotSegment](https://github.com/TBXark/TKDotSegment)的时候,发现不支持 scroll 的滚动, 就产生了自己再写一个的想法.
-
-
+写这个是因为在[TKDotSegment](https://github.com/TBXark/TKDotSegment)的时候,发现不支持 scroll 的滚动, 就产生了自己再写一个的想法.新的版本可以点击右边的按钮展开下面的选择区域,按钮的宽高可以选择固定和按照文字宽度设置宽度.
 XLSegment有如下三种 Style:
 <br>
 ![image](https://github.com/sfmDev/XLSegment/blob/master/XLSegmentGif.gif)   
 
 ---
 欢迎各位star以及pl.
-
 ## CooaPod
    Swift 3: 
 ` pod 'XLSegment', '~> 0.1.0'`</br>
