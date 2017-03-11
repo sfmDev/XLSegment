@@ -38,10 +38,15 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="7bm-xs-oiV" secondAttribute="trailing" id="BMB-jB-sZW"/>
+                <constraint firstItem="7bm-xs-oiV" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="sEy-tZ-cKV" secondAttribute="trailing" constant="5" id="NNK-Dv-gbe"/>
                 <constraint firstItem="7bm-xs-oiV" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="UOf-Aw-eP3"/>
                 <constraint firstItem="sEy-tZ-cKV" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="eOy-tl-3SN"/>
+                <constraint firstItem="sEy-tZ-cKV" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="5" id="gj4-72-J0e"/>
                 <constraint firstItem="sEy-tZ-cKV" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="kqh-Bx-pez"/>
             </constraints>
+            <connections>
+                <outlet property="cellBtn" destination="sEy-tZ-cKV" id="4rd-nI-hR2"/>
+            </connections>
         </collectionViewCell>
     </objects>
 </document>

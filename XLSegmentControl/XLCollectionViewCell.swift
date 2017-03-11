@@ -10,6 +10,8 @@ import UIKit
 
 class XLCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet weak var cellBtn: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

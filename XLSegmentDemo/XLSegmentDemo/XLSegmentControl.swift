@@ -302,7 +302,7 @@ class XLSegmentControl: UIView {
 
             moreBtn = UIButton(frame: btnFrame)
             moreBtn?.setImage(UIImage(named: "arrow_down@2x"), for: .normal)
-            moreBtn?.backgroundColor = UIColor(hexString: "#F0F0F0")
+            moreBtn?.backgroundColor = UIColor.lightGray
             moreBtn?.addTarget(self, action: #selector(XLSegmentControl.moreBtnTapped), for: .touchUpInside)
             addSubview(moreBtn!)
 
@@ -314,26 +314,22 @@ class XLSegmentControl: UIView {
             selectCollecionView?.dataSource = self
             selectCollecionView?.register(UINib(nibName: "XLCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "XLCollectionViewCell")
             addSubview(selectCollecionView!)
-//            self.window?.addSubview(selectCollecionView!)
 
             blackView = UIView()
-            blackView?.backgroundColor = UIColor(hexString: "#000000", alpha: 0.3)
+            blackView?.backgroundColor = UIColor.white.withAlphaComponent(0.3)
             blackView?.frame = CGRect(x: 0, y: (selectCollecionView?.frame.origin.y)! + collectionViewH, width: self.bounds.width, height: 0)
-//            blackView?.addTapGesture(action: { (tap) in
-//                print("tapped")
-//            })
             addSubview(blackView!)
 
             spaceView = UIView()
             spaceView?.frame = frame
-            spaceView?.backgroundColor = UIColor(hexString: "#F0F0F0")
+            spaceView?.backgroundColor = UIColor.white
             addSubview(spaceView!)
             spaceView?.isHidden = true
 
             maskLabel = UILabel()
             maskLabel?.frame = CGRect(x: 20, y: (self.spaceView?.frame.origin.y)!, width: frame.width, height: frame.height)
             maskLabel?.text = "全部分类"
-            maskLabel?.textColor = UIColor(hexString: "#474747")
+            maskLabel?.textColor = UIColor.black
             maskLabel?.font = UIFont.systemFont(ofSize: 14)
             spaceView?.addSubview(maskLabel!)
 
@@ -645,25 +641,5 @@ extension String {
         let text = self as NSString
         let rect = text.boundingRect(with: size, options:.usesLineFragmentOrigin, attributes: attributes, context:nil)
         return rect.size.width
-    }
-}
-
-extension UIColor {
-    /// EZSE: init method with RGB values from 0 to 255, instead of 0 to 1. With alpha(default:1)
-    public convenience init(r: CGFloat, g: CGFloat, b: CGFloat, a: CGFloat = 1) {
-        self.init(red: r / 255.0, green: g / 255.0, blue: b / 255.0, alpha: a)
-    }
-
-    /// EZSE: init method with hex string and alpha(default: 1)
-    public convenience init?(hexString: String, alpha: CGFloat = 1.0) {
-        var formatted = hexString.replacingOccurrences(of: "0x", with: "")
-        formatted = formatted.replacingOccurrences(of: "#", with: "")
-        if let hex = Int(formatted, radix: 16) {
-            let red = CGFloat(CGFloat((hex & 0xFF0000) >> 16)/255.0)
-            let green = CGFloat(CGFloat((hex & 0x00FF00) >> 8)/255.0)
-            let blue = CGFloat(CGFloat((hex & 0x0000FF) >> 0)/255.0)
-            self.init(red: red, green: green, blue: blue, alpha: alpha)        } else {
-            return nil
-        }
     }
 }
