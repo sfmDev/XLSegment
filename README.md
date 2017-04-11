@@ -15,7 +15,7 @@ XLSegment有如下三种 Style:
 ---
 欢迎各位star以及pl.
 ## CooaPod
-` pod "XLSegment"
+` pod "XLSegment"` 
 
 
 ## Version
