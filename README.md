@@ -15,10 +15,7 @@ XLSegment有如下三种 Style:
 ---
 欢迎各位star以及pl.
 ## CooaPod
-   Swift 3: 
-` pod 'XLSegment', '~> 0.1.0'`</br>
-   Swift 2.x:
-` pod 'XLSegment', '~> 0.0.2'`
+` pod 'XLSegment'
 
 
 ## Version
