@@ -2,8 +2,8 @@
 [![License MIT](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://raw.githubusercontent.com/sfmDev/XLSegment/master/LICENSE)
 ![CocoaPods](http://img.shields.io/cocoapods/v/XLSegment.svg?style=flat)
 ![CocoaPods](http://img.shields.io/cocoapods/p/XLSegment.svg?style=flat)
-[![Support](https://img.shields.io/badge/support-iOS%208%2B%20-blue.svg?style=flat)](https://www.apple.com/nl/ios/)</br>
-[![SourceForge](https://img.shields.io/cocoapods/dt/XLSegment.svg)]()
+[![Support](https://img.shields.io/badge/support-iOS%208%2B%20-blue.svg?style=flat)](https://www.apple.com/nl/ios/)
+[![SourceForge](https://img.shields.io/cocoapods/dt/XLSegment.svg)]()</br>
 ---
 
 XLSegment 是一个目前有三种 Style 的 Segment, 支持滚动.
